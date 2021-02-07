@@ -1,0 +1,274 @@
+För att lägga till dina packages till projektet, npm install sen paketetn med mellanslag, --save
+för att spara dem till projektet. Även npm install nodemon --s.
+Vi måste alltid i våran package.json säga åt npm att starta node "sen vår filnamn, i detta fall. service.js.
+ALLTID spara filen innan vi gör något.
+Och npm starta
+
+"test": "echo \"Error: no test specified\" && exit 1", TOG BORT DENNA SCRIPT FRÅN PACKAGE.JSON SCRIPTS.
+Starta alltid din serve när du startar. npm run serve
+
+
+ const userlist = req.params.userlist;
+    const userById = userlist.filter((e) => {
+        return e !== userlist;
+});
+
+// kom ihåg lös hanteringen av delete av id på både produkt och 
+
+
+Hämta ett API 
+
+const request = require('request');  // Inkludera request, npm install request -- save
+request.get('http://rickandmortyapi.com/api/character/?name=pickle rick', (e , a) => {
+if(!e){
+    data = JSOn.parse(a.body); /7gör om till json
+    ricks = data.results; // Använd resultatet
+    ricks.forEach((r) => { //loopar igenom alla resultat.
+        console.log(r.image);
+    });
+}
+});
+
+key value.
+
+{
+    "property1" : "value",
+    "property2" : {
+        "childproperty1" : 0,
+        "childproperty2" : true
+        }
+}
+
+var data = {
+    "property1" : "value",
+    "property2" : {
+        "childproperty1" : 0,
+        "childproperty2" : true
+        }
+};
+
+data.property1 = "value";
+console.log(data.property2);
+console.log(data.property2.childproperty1);
+
+
+databas kod. 
+
+const doQueryCB = () => {
+    open({
+        filename: './example.db',
+        driver: sqlite3.database
+    }) .then((con )=>{
+        con.all('SELECT username, id FROM users ORDER BY username ASC')
+        .then((rows) => {
+            console.log(rows);
+        })
+    
+        .catch(error => {
+            console.log('Nått gick fel.');
+            console.log(error);
+        });
+    
+    }). catch(error => {
+        console.log(error);
+    
+    }).finally(()=>{
+        console.log('Vi är klara');
+    });
+};
+
+const doQuery = async () => {
+    try { 
+        const db = await dbpromise;
+        const users = await db.all('SELECT username, id FROM users ORDER BY username ASC');
+        return users;
+    }
+    catch(error){
+        throw new Error(error);
+    }
+};
+
+ //userlist = users.userlist;
+    //res.json(userlist);
+
+
+    För att skapa constriant mellan tabeller.
+    Tex.
+
+    create table if not exists !tabellnamn! (
+        name varchar(nr) NOT NULL,
+        owner INTEGER,
+        FOREIGN KEY(owner)
+            REFERENCES !annan table!(sen vilket värde i tabellen som ska vara kopplat, typ id));
+SPECIFIKT VID ANVÄNDADE AV RELATIONS TABELL.!! OCH DÅ FOREGIN KEY!!
+
+
+
+
+!!gammalt!!
+//Get users by id funger inte.
+routes.get('/GetUser/:id', (req, res) => {
+    this.uId = users.userlist.uId;
+    uId = req.params.id;
+    let id = users.userlist.uId.filter((e) => {
+        return e === uId;
+    });
+
+    res.json(id);
+});    
+
+routes.get('GetProd/:id',(req, res) => {
+    product = products.productlist.pId;
+    let pId = req.params.id
+    let productById = product.filter((e) => {
+        return e === pId;
+    });
+    res.json(productById);
+});
+
+app.get('/accounts/:id', (request, response) => {
+    const accountId = Number(request.params.id);
+    const getAccount = accounts.find((account) => account.id === accountId);
+  
+    if (!getAccount) {
+      response.status(500).send('Account not found.')
+    } else {
+      response.json(getAccount);
+    }
+  });
+
+
+  routes.get('/product/:id', (req, res) => {
+
+    const product = products.find((p) => {
+        return p.id == req.params.id;
+    });
+    if(product) {
+        res.json(product);
+    }
+    else {
+        res.status(404)
+            .send(`Product with id: ${req.params.id} not found`);
+    }
+});
+
+
+
+
+const updateProduct = async (id) => {
+    try{
+        const dbCon = await dbPromise;
+        const update = await dbCon.run("UPDATE products SET (Name, Description, Price) VALUES(?, ?, ?, ?) WHERE id=?", [id]);
+        return({status: 'OK'});
+    }
+    catch(error)
+    {
+        throw new Error('Error updating product.' +error);
+    }
+};
+
+
+
+const saltRounds = 10;
+
+const bcrypt = require('bcrypt');
+
+
+const genPass = async (pwd) => {
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(pwd, salt);
+    return hash;
+};
+
+
+const compPass = async (Password, hash) => {
+    const match = await bcrypt.compare(Password, hash);
+    return match;
+};
+(async ( ) => {
+    const password = 'kallekula';
+    const password2 = 'tomteluva';
+    const pass1 = await genPass(password);
+    const pass2 = await genPass(password);
+    const pass3 = await genPass(password2);
+    
+    console.log(await compPass(password, pass1));//True
+    console.log(await compPass(password, pass2));//True
+    console.log(await compPass(password, pass3));//False
+    console.log(await compPass(password2, pass3));//True
+})();
+
+routes.post('/file', upload.single('file'), async (req,res) => {
+    const file = req.file; //Uppladdad fil
+    //Hämta filändelse
+    const exts = req.file.originalname.split('.');
+    const fileEnd = exts[exts.length - 1];
+    //Skapa vårt filnamn
+    const fileName = './public/' + req.body.filename + '.' + fileEnd;
+    try {
+        //Flytta vår fil
+        const filewrite = await fs.rename(file.path, fileName);
+        //Om inget fel skicka ok
+        if(!filewrite) {
+            res.json({'status' : 'ok '});
+        }
+        else {
+            throw error;
+        }
+    } catch(error) { //Fånga våra fel
+        await fs.unlink(file.path); //Ta bort temporär fil
+        res.status(400).json(error);
+    }
+});
+
+
+
+const genPass = async (pwd) => {
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(pwd, salt);
+    return hash;
+};
+
+const compPass = async (Password, hash) => {
+const match = await bcrypt.compare(Password, hash);
+return match;
+};
+
+const userLogin = async (data) => {
+    try{
+        const compPass = async (Password, hashPassword) => {
+            const match = await bcrypt.compare(Password, hashPassword);
+            return match;
+        }
+        if(match == true)
+            const dbCon = await dbPromise;
+            const userLog = await dbCon.get('SELECT Email, FirstName, LastName, id FROM users WHERE Email=?',[data.Email]);
+            return userLog;
+            
+        }
+        catch(error)
+        {
+            throw new Error(error);
+        }
+};
+
+userLogin : userLogin
+
+INSERT INTO users (Email, FirstName, LastName, Password) VALUES
+    ('h19simal@du.se' ,'Simon', 'Alexandersson','hej123'),
+    ('h18kalle@du.se', 'Kalle', 'Kula','lösen123'),
+    ('h19thomas@du.se', 'Thomas', 'Brunström','kod123');
+
+    const userLogin = async (data) => {
+    try{
+        const dbCon = dbPromise;
+        //const Password = await dbCon.get("SELECT Password FROM users WHERE Password=?",[Password]);
+        //const compare = await bcrypt.compare(data.Password, Password);
+        const userInfo = await dbCon.get("SELECT Email, FirstName, LastName, id FROM users WHERE Email=?",[data.Email, data.Password]);
+        return(userInfo);
+    }
+    catch(error)
+    {
+        throw new Error('Error login in.' + error);
+    }
+};
