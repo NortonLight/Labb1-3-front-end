@@ -33,9 +33,6 @@
                           <a class="nav-link active" aria-current="page" href="index.html">Startsida</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="adminpage.html">Admin login</a>
-                        </li>
-                        <li class="nav-item">
                           <a class="nav-link" href="./shoppingcart.html" tabindex="-1" aria-disabled="true">Kundkorg
                                 <img src="../upload/shoppingcart.jpg" alt="" width="30" height="24" class="d-inline-block align-top">
                             </a>
@@ -54,7 +51,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">E-COMMERCE CART</h1>
+        <h1 class="jumbotron-heading">KUNDKORG</h1>
      </div>
 </section>
 
@@ -65,9 +62,10 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                          <!-- DETTA ÄR NAMNEN PÅ SJÄLVA TABLE -->
+                        
                             <th scope="col"> </th>
                             <th scope="col">Product</th>
-                            <th scope="col">Available</th>
                             <th scope="col" class="text-center">Quantity</th>
                             <th scope="col" class="text-right">Price</th>
                             <th> </th>
@@ -75,9 +73,9 @@
                     </thead>
                     <tbody>
                         <tr>
+                          <!-- HÄR VILL VI FÅ PRODUKT NAMNEN NÄR MAN TRYCKER PÅ EN PRODUKT I INDEX.HTML SKA DEN SPARAS I KUNDKORG-->
                             <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                             <td>Product Name Dada</td>
-                            <td>In stock</td>
                             <td><input class="form-control" type="text" value="1" /></td>
                             <td class="text-right">124,90 €</td>
                             <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
@@ -85,7 +83,6 @@
                         <tr>
                             <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                             <td>Product Name Toto</td>
-                            <td>In stock</td>
                             <td><input class="form-control" type="text" value="1" /></td>
                             <td class="text-right">33,90 €</td>
                             <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
@@ -93,7 +90,6 @@
                         <tr>
                             <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                             <td>Product Name Titi</td>
-                            <td>In stock</td>
                             <td><input class="form-control" type="text" value="1" /></td>
                             <td class="text-right">70,00 €</td>
                             <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
@@ -129,9 +125,10 @@
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-block btn-light">Continue Shopping</button>
+                    <button class="btn btn-block btn-light" href="index.html" >Fortsätt handla</button>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
+                  <!-- här kan vi göra en popup modal som säger . grattis du har köpt varorna-->
                     <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
                 </div>
             </div>
