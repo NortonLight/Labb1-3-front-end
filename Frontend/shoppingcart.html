@@ -51,6 +51,10 @@
   <section class="jumbotron text-center">
     <div class="container">
       <h1 class="jumbotron-heading">KUNDKORG</h1>
+      <h1 class="jumbotron-headin">  </h1>
+      <button type="button" class="btn btn-primary" data-toggle="#" data-target="#" v-on:click="getItem()">
+        getItem
+      </button>
     </div>
   </section>
 
@@ -160,6 +164,8 @@
     },
     methods: {
       getItem() {
+        window.alert("hej hej!")
+        addProducttoCart(localStorage.getItem('key'))
         var value = localStorage.getItem("key");
         window.alert(value);
 
@@ -167,6 +173,9 @@
 
     },
   });
+ import addProducttoCart from 'index.html';
+    
+
 </script>
 
 </html>

@@ -27,7 +27,7 @@
                     <nav class="navbar navbar-light bg-light">
                       <div class="container-fluid">
                       <a class="navbar-brand" href="#">
-                          <img src="../upload/logo.jpg" alt="" width="30" height="24" class="d-inline-block align-top">
+                          <img src="~../upload/logo.jpg" alt="" width="30" height="24" class="d-inline-block align-top">
                           VirtualGameGear
                       </a>
                       </div>
@@ -40,7 +40,7 @@
                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                           <a class="nav-link" href="./shoppingcart.html" tabindex="-1" aria-disabled="true">Kundkorg
-                                <img src="../upload/shoppingcart.jpg" alt="" width="30" height="24" class="d-inline-block align-top">
+                                <img src="~../upload/shoppingcart.jpg" alt="" width="30" height="24" class="d-inline-block align-top">
                             </a>
                           </li>
                         </ul>
@@ -296,6 +296,13 @@
           });
         }
     });
+    export default { 
+      methods: {
+        addProducttoCart(){
+          localStorage.setItem('key', 'Hey')
+        }
+      }
+    };
 
     </script>
   </body>
