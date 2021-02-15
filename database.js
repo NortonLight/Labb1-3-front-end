@@ -39,7 +39,7 @@ const getUserById = async (id) => {
 const getProductById = async (id) => {
     try{
         const dbCon = await dbPromise;
-        const product = await dbCon.get("SELECT Name, Description, Price , id FROM products WHERE id=?",[id]);
+        const product = await dbCon.get("SELECT Name, Description, Price , id, img FROM products WHERE id=?",[id]);
         return product;
     }
     catch(error){
@@ -50,7 +50,7 @@ const getProductById = async (id) => {
 const getProductList = async () => {
     try{
         const dbCon = await dbPromise;
-        const productlist = await dbCon.all("SELECT Name, Description, Price, id FROM products ORDER BY name ASC");
+        const productlist = await dbCon.all("SELECT Name, Description, Price, id, img FROM products ORDER BY name ASC");
         return productlist;
     }
     catch(error)

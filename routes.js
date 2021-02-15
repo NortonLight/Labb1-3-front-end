@@ -22,6 +22,7 @@ routes.get('/GetUser/', async (req, res) => {
 routes.get('/GetProducts' , async (req, res) => {
     try{
         const productlist = await dbService.getProductList();
+        productlist.img = res.contentType('png');
         res.json(productlist);
     }
     catch(error)
