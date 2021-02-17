@@ -4,6 +4,7 @@ const dbService = require('./database');
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 const fs = require("fs").promises;
+var id;
 
 
 //Klar och fungerar

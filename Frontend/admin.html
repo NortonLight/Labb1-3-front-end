@@ -70,34 +70,13 @@
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal"
                                 v-on:click="showProductInUpdateForm(product.id)">
-                                Manage Product
+                                Edit Product
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <!-- create cards
-    <div class="row justify-content-center" style="margin-top: 15px">
-        <div class="card" style="width: 18rem;" v-for="product in products" v-bind:key="product.id">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.Name }}</h5>
-                <p class="card-text">{{ product.Description }}</p>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"> {{ product.Price }} </li>
-                </ul>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal"
-                    v-on:click="showProductInUpdateForm(product.id)">
-                    Manage Product
-                </button>
-                lägg till en buy funktion för att skicka in product till buy.html
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal"
-                    v-on:click="addProducttoCart">
-                    Buy
-                </button>
-            </div>
-        </div>
-    </div> -->
 
 
         <!-- Add Modal -->
@@ -165,6 +144,14 @@
                                 <input type="number" class="form-control" name="updatePrice" id="updatePrice">
                             </div>
                             <div class="form-group">
+                                <form method="POST" action="" enctype="multipart/form-data">
+                                    Select file: <input type="file" name="file" id="file" class="form-control"><br>
+                                    <input type="button" class="btn btn-info" value="Add Img to product" id="btn_upload"
+                                        v-on:click="addImgToProduct">
+                                </form>
+                                <div id="Preview"></div>
+                            </div>
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-danger float-right"
                                     v-on:click="deleteProduct">Delete</button>
                                 <input type="button" class="btn btn-primary float-right" value="Save changes"
@@ -230,6 +217,8 @@
             el: "#admin",
             data: {
                 products: [],
+                file: [],
+                img: [],
             },
             methods: {
                 //method to show details of a product in a form (in the update modal) - get product by id
@@ -244,7 +233,7 @@
                             $('#updatePrice').val(products.Price);
                         }
                     });
-                    $('#updateModal').modal('show');
+                    $('#updateModal').show();
                 },
                 //method to update product
                 updateProduct() {
@@ -266,20 +255,17 @@
                             var self = this;
                             $.getJSON("/GetProducts", function (jsondata) {
                                 self.products = jsondata;
-
                             });
 
-                            $('#updateModal').modal('hide');
+                        
+                        $('#updateModal').hide();
                         },
                         error: (error) => {
                             console.log(error);
                         }
                     });
                 },
-                //method to buy a product
-                addProducttoCart: function () {
-                    localStorage.setItem("key", "hey");
-                },
+
                 //method to delete product
                 deleteProduct(id) {
                     var product = {
@@ -296,12 +282,41 @@
                         }
                     });
                 },
+
+
+                addImgToProduct(id) {
+                    var formData = new FormData();
+                    formData.append('file', $('#file')[0].files[0]);
+                    var product = {
+                        id: $('#updateModal #updateId').val()
+                    }
+
+                    $.ajax({
+                        url: '/AddImg/' + product.id,
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            if (response != 0) {
+                                // Show image preview
+                                $('#preview').append("<img src='" + response + "' width='100' height='100' style='display: inline-block;'>");
+                            } else {
+                                alert('file not uploaded');
+                            }
+                            $('#updateModal').hide();
+                        }
+                    })
+
+                },
+
                 //method to add product
                 addProduct() {
                     const product = {
                         Name: $('#addName').val(),
                         Description: $('#addDescription').val(),
-                        Price: $('#addPrice').val()
+                        Price: $('#addPrice').val(),
+                        //Img: $('#Addimg').val()
                     }
 
                     $.ajax({
@@ -311,9 +326,8 @@
                         dataType: 'JSON',
                         contentType: 'application/json; charset=utf-8',
                         success: () => {
-                            getProducts()
-                            //var self = this;
-                            // $.getJSON("GetProducts();
+
+                            getProducts();
                             $('#addModal').modal('hide');
                             clearAddForm();
                         }

@@ -63,7 +63,9 @@ const addProduct = async (Name, Description, Price) => {
     try{
         const dbCon = await dbPromise;
         await dbCon.run("INSERT INTO products (Name, Description, Price) VALUES(?, ?, ?)", [Name, Description, Price]);
-        return({ status: 'Ok'});
+        const id = await dbCon.get("SELECT Id FROM products WHERE Name=?", [Name]);
+        return id;
+        //return({ status: 'Ok'});
     }
     catch(error)
     {

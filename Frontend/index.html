@@ -29,8 +29,8 @@
           <!-- Image and text -->
           <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-              <a class="navbar-brand" href="..upload/logo.gif">
-                <img src="../upload/logo.gif" alt="" width="30" height="24" class="d-inline-block align-top">
+              <a class="navbar-brand" href="#">
+                <img id="logo" src="../upload/logo.gif" alt="" width="30" height="24" class="d-inline-block align-top">
                 VirtualGameGear
               </a>
             </div>
@@ -41,7 +41,8 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="./shoppingcart.html" tabindex="-1" aria-disabled="true">Shoppingcart
-                  <img href="../upload/shoppingcart.gif" src="../upload/shoppingcart.gif" alt="" width="30" height="24" class="d-inline-block align-top">
+                  <img id="shoppinglogo" src="../upload/shoppingcart.gif" alt="" width="30" height="24"
+                    class="d-inline-block align-top">
                 </a>
               </li>
             </ul>
@@ -58,7 +59,8 @@
       <div class="card" style="width: 18rem;" v-for="product in products" v-bind:key="product.id">
         <div class="card-body">
           <!-- TOG BORT + IMG I FRÅN UPLOAD-->
-          <img type="Image" class="card-img-top" v-bind:src="'../upload'" width="25px" height="25px">
+          <img type="Image" class="card-img-top" v-bind:src="product.img" width="50px" height="50px">
+          <div class="displayimages">{{product.img}}</div>
           <h5 class="card-title">{{ product.Name }}</h5>
           <p class="card-text">{{ product.Description }}</p>
           <ul class="list-group list-group-flush">
@@ -125,6 +127,7 @@
       el: "#app",
       data: {
         products: [],
+        imgArr: [],
       },
       methods: {
         //method to show details of a product in a form (in the update modal) - get product by id
@@ -214,23 +217,18 @@
           });
         }
       },
+
       mounted() {
         //method to get all products
         var self = this;
         $.getJSON("/GetProducts", function (jsondata) {
-          //products.img = Response("contentType", "img/jpg");
-          //products.img = Image;
-          img: {
-
-          }
-          
-          console.log(JSON.stringify(jsondata));
+          //console.log(JSON.stringify(jsondata));
           self.products = jsondata;
-
-           });
+        });
       }
     });
 
   </script>
 </body>
+
 </html>
