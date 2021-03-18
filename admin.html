@@ -15,7 +15,6 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <!------ Include the above in your HEAD tag ---------->
-
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
@@ -30,10 +29,9 @@
                     <nav class="navbar navbar-light bg-light">
                         <div class="container-fluid">
                             <a class="navbar-brand" href="#">
-                                <img src="~../upload/logo.jpg" alt="" width="30" height="24"
-                                    class="d-inline-block align-top">
+                                <img id="logo" src="../upload/logo.gif" alt="" width="30" height="24" class="d-inline-block align-top">
                                 VirtualGameGear
-                            </a>
+                              </a>
                         </div>
                     </nav>
                     <a class="navbar-brand" href="index.html">Homepage</a>
@@ -149,12 +147,11 @@
                                     <input type="button" class="btn btn-info" value="Add Img to product" id="btn_upload" data-dismiss="modal"
                                         v-on:click="addImgToProduct">
                                 </form>
-                                <div id="Preview"></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger float-right"
+                                <button type="submit" class="btn btn-danger float-right" data-dismiss="modal"
                                     v-on:click="deleteProduct">Delete</button>
-                                <input type="button" class="btn btn-primary float-right" value="Save changes"
+                                <input type="button" class="btn btn-primary float-right" data-dismiss="modal" value="Save changes"
                                     v-on:click="updateProduct">
                             </div>
                         </form>
@@ -195,13 +192,8 @@
                         </li>
                     </ul>
                 </div>
-
-                <!--Grid column-->
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
-
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
             © 2020 Copyright: Virtual Gaming Gear
@@ -233,7 +225,7 @@
                             $('#updatePrice').val(products.Price);
                         }
                     });
-                    $('#updateModal').show();
+                    $('#updateModal').close();
                 },
                 //method to update product
                 updateProduct() {
@@ -256,8 +248,6 @@
                             $.getJSON("/GetProducts", function (jsondata) {
                                 self.products = jsondata;
                             });
-
-                        
                         $('#updateModal').hide();
                         },
                         error: (error) => {
@@ -279,6 +269,7 @@
                             $.getJSON("/GetProducts", function (jsondata) {
                                 self.products = jsondata;
                             });
+                            $('#updateModal').hide();
                         }
                     });
                 },
