@@ -59,9 +59,10 @@
       <div class="card" style="width: 18rem;" v-for="product in products" v-bind:key="product.id">
         <div class="card-body">
           <!-- TOG BORT + IMG I FRÅN UPLOAD-->
-          <img type="Image" class="card-img-top" v-bind:src="product.img" width="50px" height="50px">
-          <div class="displayimages">{{product.img}}</div>
-          <h5 class="card-title">{{ product.Name }}</h5>
+          <img class="card-img-top" v-bind:src="product.img" width="50px" height="50px">
+          <!--  <img class="card-img-top" v-bind:src="item.volumeInfo.imageLinks.thumbnail" v-bind:alt="item.volumeInfo.title">
+         <img class="displayimages">{{product.img}}</div>-->
+          <h5 class="card-title">{{ product.Name }}</h5> 
           <p class="card-text">{{ product.Description }}</p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"> {{ product.Price }} </li>
@@ -223,6 +224,7 @@
         var self = this;
         $.getJSON("/GetProducts", function (jsondata) {
           //console.log(JSON.stringify(jsondata));
+          //self.product.img(./)
           self.products = jsondata;
         });
       }
